@@ -1,0 +1,45 @@
+# showback-forge — reference view bundle (illustrative).
+#
+# v0.1 doesn't consume this config file directly; subcommands take their
+# parameters as flags. This file documents the SHAPE a future "report
+# bundle" config will take when v0.2 adds the `report` subcommand that
+# composes multiple views into a single per-team packet.
+
+reports:
+  - id: weekly_team_packet
+    description: Weekly cost packet sent to each engineering team.
+    audience: engineering
+    views:
+      - type: render
+        dimension: cost_center
+        period: 1w
+        periods: 8
+      - type: trend
+        dimension: cost_center
+        period: 1w
+        periods: 8
+      - type: top
+        dimension: service
+        period: 1w
+        limit: 10
+
+  - id: monthly_program_packet
+    description: Monthly org-wide cost packet for the FinOps program review.
+    audience: program
+    views:
+      - type: render
+        dimension: cost_center
+        period: 1mo
+        periods: 6
+      - type: trend
+        dimension: cost_center
+        period: 1mo
+        periods: 6
+      - type: trend
+        dimension: product
+        period: 1mo
+        periods: 6
+      - type: top
+        dimension: tenant
+        period: 1mo
+        limit: 10

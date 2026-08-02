@@ -1,0 +1,31 @@
+[package]
+name = "showback-forge"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89.0"
+license = "MIT"
+description = "Render per-team / per-product / per-tenant cost views from attribution-forge events. Standardized recurring views (multi-period tables, period-over-period deltas, top-N) suitable for team-level showback and downstream embedding into review packets."
+repository = "https://github.com/pleme-io/showback-forge"
+
+[dependencies]
+forge-core = { path = "../forge-core" }
+clap = { version = "4.5", features = ["derive", "env"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1.0"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints.clippy]
+pedantic = "warn"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
